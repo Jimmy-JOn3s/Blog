@@ -13,18 +13,22 @@ class AuthController extends Controller
     }
     public function login(Request $request)
     {
-        $request->validate ([
+        $request->validate([
             'email' => 'required',
             'password' => 'required',
-        ]);     
+        ]);
 
         if (Auth::attempt([
             'email' => $request->email,
-            'password' =>  $request->password
-            ])) 
-            {
+            'password' => $request->password,
+        ])) {
             return redirect('/posts/index');
         }
-        return back()->with('msg','Login Failed');  
+        return back()->with('msg', 'Login Failed');
+    }
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/posts/index');
     }
 }
