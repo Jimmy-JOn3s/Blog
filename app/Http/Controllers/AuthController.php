@@ -22,7 +22,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ])) {
-            return redirect('/posts/index');
+            return redirect('admin/');
         }
         return back()->with('msg', 'Login Failed');
     }

@@ -71,7 +71,7 @@ class UserController extends Controller
 	
 
         // return back();
-        return redirect('/users')->with('msg', 'User has been created!! ');
+        return redirect('admin/users')->with('msg', 'User has been created!! ');
     }
 
     /**
@@ -120,7 +120,7 @@ class UserController extends Controller
             'address' => $request->address,
             'role' => $request->role,
         ]);
-        return redirect('/users')->with('msg', 'User has been updated successfully');
+        return redirect('admin/users')->with('msg', 'User has been updated successfully');
 
     }
 

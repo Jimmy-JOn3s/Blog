@@ -29,16 +29,50 @@
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
-              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                  <a class="nav-link active" aria-current="page" href="{{url('/login')}}">Login</a>
-                  <a class="nav-link" href="#">Features</a>
-                  <a class="nav-link" href="#">Pricing</a>
-                  <a class="nav-link disabled">Disabled</a>
-                </div>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled">Disabled</a>
+                  </li>
+                </ul>
+                <form class="d-flex" role="search">
+                  <ul class="navbar-nav">
+                      <li class="nav-item dropdown">
+                          @if (auth()->check())
+                              <a class="nav-link dropdown-toggle active" href="{{url ('/login')}}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  {{auth()->user()->name}}
+                              </a>                           
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="{{url ('/logout')}}">Sign out</a></li>                               
+                              </ul>
+                          @else 
+                              <a class="nav-link active" href="{{url ('/login')}}">Log In</a>
+                           @endif
+                        </li>
+                  </ul>
+              </form>
               </div>
             </div>
           </nav>
+          <div class="container">
+            @foreach ($posts as $post)
+              <div class="card my-3">
+                  <div class="card-header">
+                    {{$post->title}}
+                  </div>
+                  <div class="card-body">
+                              <p class="card-text">{{$post->content}}</p>
+                          <a href="#" class="btn btn-primary">Go somewhere</a> 
+                    </div>
+              </div>
+            @endforeach
+          </div>
         </div>
     </body>
 </html>

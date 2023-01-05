@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <title>Index</title>
-</head>
-<body>
+@extends('admin-panel.master')
+    @section('title','Post-Index')
+    @section('content')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -23,7 +14,7 @@
                     @endif
                     </h5>
                 
-                <a href="{{ url ('/posts/create/')}}" class=" btn btn-primary"> Add New</a>
+                <a href="{{ url ('admin/posts/create/')}}" class=" btn btn-primary"> Add New</a>
             </div>
             <!-- <ul class=" list-group list-group-fluid">
                 @foreach($posts as $post)
@@ -32,21 +23,21 @@
             </ul> -->
             
         </div>
-        <div>
+        <div class="mt-3">
             @if(session() -> has('msg'))
             <div class=" alert alert-success">
                 <span>{{ session()->get('msg')}}</span>
                 <button data-bs-dismiss='alert' class='btn btn-close float-end'></button>
             </div>
             @endif 
-            <table class=" table table-hover table-striped">
+            <table class=" table table-hover table-bordered">
                 <thead>
                     <tr>
-                        <td>id</td>
-                        <td>title</td>
-                        <td>content</td>
-                        <td>category</td>
-                        <td>action</td>
+                        <td>ID</td>
+                        <td>Title</td>
+                        <td>Content</td>
+                        <td>Category</td>
+                        <td>Action</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,13 +48,15 @@
                         <td>{{$p->content}}</td>
                         <td>{{$p->category->name }}</td>
                         <td>
-                            <form action="{{url('/posts/' .$p->id . '/delete') }}" method="post"> 
+                            <form action="{{url('admin/posts/' .$p->id . '/delete') }}" method="post"> 
                                 @csrf
-                            <a href="{{ url('/posts/' .$p->id. '/comments')}}" class="btn btn-success ">Comments
+                            <a href="{{ url('admin/posts/' .$p->id. '/comments')}}" class="btn btn-sm btn-success ">Comments
                                 <span class="badge text-bg-secondary">{{$p->comments->count()}}</span>
                             </a>
-                            <a href="{{ url('/comments/')}}" class="btn btn-primary ">Edit</a>
-                            <button class="btn btn-danger" onclick="return confirm('are you sure to delete?')">Delete</button>
+                            <a href="{{ url('admin/posts/'.$p->id.'/edit')}}" class="btn btn-sm btn-primary "><i class="fa-solid fa-pen-to-square"></i>
+                                Edit</a>
+                            <button class="btn btn-sm btn-danger" onclick="return confirm('are you sure to delete?')"><i class="fa-regular fa-trash-can"></i>
+                                Delete</button>
                             </form>
                         </td>
                     </tr>
@@ -73,5 +66,4 @@
             </table>
         </div>
     </div>
-</body>
-</html>
+@endsection

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
-
+use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 
 
@@ -44,7 +44,7 @@ class CategoryController extends Controller
             'name' => $name
         ]);
 
-        return redirect('/categories')->with('msg', 'Category has been created!! ');
+        return redirect('admin/categories')->with('msg', 'Category has been created!! ');
 
     }
 
@@ -86,7 +86,7 @@ class CategoryController extends Controller
         Category::find($id)->update([
             'name' => $request->name
         ]);
-        return redirect('/categories')->with('msg', 'a category has been updated successfully');
+        return redirect('admin/categories')->with('msg', 'a category has been updated successfully');
 
     }
 
